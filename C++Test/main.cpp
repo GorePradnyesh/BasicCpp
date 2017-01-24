@@ -27,6 +27,7 @@ void printExecutionOptions()
 	PRINTLINE("1 : Test Shared Pointer");
 	PRINTLINE("2 : Test Scoped Delete");
 	PRINTLINE("3 : Test Assignment operator");
+	PRINTLINE("4 : Rvalue assignment/ctor");
 	
 	std::cout << "option : ";
 }
@@ -59,6 +60,9 @@ int main(int argc, const char * argv[])
 				break;
 			case 3:
 				AssignmentTester::TestAssignment();
+				break;
+			case 4:
+				TestRValueRefs();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;

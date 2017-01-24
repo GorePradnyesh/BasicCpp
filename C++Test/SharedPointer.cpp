@@ -7,23 +7,25 @@
 //
 
 #include "SharedPointer.h"
+#include "CommonUtils.h"
 #include <memory>
 #include <iostream>
 
 namespace SharedPointerTest
 {
-	
+	// InnerData class
 	class InnerData
 	{
 	public:
-		InnerData(int inData)
-			:data(inData)
-		{}
+	InnerData(int inData)
+		:data(inData)
+	{}
 		
 	private:
 		int data;
 	};
 	
+	// Wrapper Class
 	class Wrapper
 	{
 	public:
@@ -34,6 +36,9 @@ namespace SharedPointerTest
 		InnerData mInnerData;
 	};
 	
+	
+	
+	// RefCount implementation
 	template <typename T>
 	class RefCount
 	{
@@ -58,10 +63,11 @@ namespace SharedPointerTest
 		}
 		
 	private:
-		T mReferenceCounter;
+		std::atomic<T> mReferenceCounter;
 	};
 	
 	
+	// Custom Shared Pointer implemenation
 	template <typename T>
 	class CSharedPointer
 	{
@@ -96,7 +102,7 @@ namespace SharedPointerTest
 		{
 			mRefCount->AddRef();
 		}
-		
+
 		
 		CSharedPointer<T>& operator=(const CSharedPointer<T>& inCSharedPointer)
 		{
@@ -112,6 +118,7 @@ namespace SharedPointerTest
 				mRefCount	= inCSharedPointer.mRefCount;
 				mRefCount->AddRef();
 			}
+			return *this;
 		}
 		
 		T& operator*()
@@ -144,12 +151,95 @@ namespace SharedPointerTest
 			return mRefCount->GetCount();
 		}
 		
+		// Move constructors and operators
+		CSharedPointer(const CSharedPointer<T>&& inCSharedPointer)
+		{
+			
+		}
+		
+		
+		
 	private:
 		typedef RefCount<std::uint32_t> int32RefCount;
 		int32RefCount*					mRefCount;
 		T*								mData;
 	};
+	
+	
+	class NewWrapper
+	{
+	public:
+		NewWrapper(const InnerData& inInnerData)
+		:mInnerData(inInnerData)
+		{}
+		
+		// Copy Ctor
+		NewWrapper(const NewWrapper& inNewWrapper)
+		:mInnerData(inNewWrapper.mInnerData)
+		{
+			PRINT_LINE("Copy constructed");
+		}
+		
+		// Move constructor
+		NewWrapper(NewWrapper&& inNewWrapper)
+		:mInnerData(std::move(inNewWrapper.mInnerData))
+		{
+			PRINT_LINE("Move constructed");
+		}
+		
+		// Move constructor
+		NewWrapper(const NewWrapper&& inNewWrapper)
+		:mInnerData(std::move(inNewWrapper.mInnerData))
+		{
+			PRINT_LINE("Const Move constructed");
+		}
+		
+		// move assignment
+		NewWrapper& operator=(InnerData&& inInnerData)
+		{
+			PRINT_LINE("Move Assigned");
+			mInnerData = std::move(inInnerData);
+			return *this;
+		}
+		
+		// copy assgnment
+		NewWrapper& operator=(const InnerData& inInnerData)
+		{
+			PRINT_LINE("Copy Assigned");
+			mInnerData = inInnerData;
+			return *this;
+		}
+	private:
+		InnerData mInnerData;
+	};
+	
+	NewWrapper GetNewWrapper(const NewWrapper& inNewWrapper)
+	{
+		return inNewWrapper;
+	}
+	
+}	// anon namespace
+
+
+void TestRValueRefs()
+{
+	using namespace SharedPointerTest;
+	NewWrapper newWrapper = NewWrapper(InnerData(3));
+	
+	PRINT_LINE("====");
+	NewWrapper movedWrapper(std::move(newWrapper));
+	NewWrapper copiedWrapper(newWrapper);
+	
+	PRINT_LINE("====");
+	const NewWrapper constNewWrapper = NewWrapper(InnerData(4));
+	NewWrapper constMovedWrapper(std::move(constNewWrapper));		// inspite of xvalue, const-ness preceeds
+	
+	PRINT_LINE("====");
+	NewWrapper nw1 = std::move(GetNewWrapper(newWrapper));
+	
+	
 }
+
 
 void TestShared()
 {

@@ -12,5 +12,6 @@
 #include <stdio.h>
 
 void TestShared();
+void TestRValueRefs();
 
 #endif /* SharedPointer_hpp */
