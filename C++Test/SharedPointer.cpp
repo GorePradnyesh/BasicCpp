@@ -235,8 +235,14 @@ void TestRValueRefs()
 	NewWrapper constMovedWrapper(std::move(constNewWrapper));		// inspite of xvalue, const-ness preceeds
 	
 	PRINT_LINE("====");
-	NewWrapper nw1 = std::move(GetNewWrapper(newWrapper));
+	NewWrapper&& nw1 = std::move(GetNewWrapper(newWrapper));
 	
+	// when nw1 comes in as argument it is an lvalue ( name rvalue is treated as lvalue ).
+	// Hence to move construct it we use std::move
+	NewWrapper nw2(std::move(nw1));
+	
+	PRINT_LINE("====");
+	NewWrapper fromFunc(std::move(GetNewWrapper(newWrapper)));
 	
 }
 
