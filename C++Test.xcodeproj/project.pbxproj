@@ -28,6 +28,8 @@
 		3F09BF861E23511E005B66CF /* AssignmentTester.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssignmentTester.h; sourceTree = "<group>"; };
 		3F0CEED31D11AA6E00DD2202 /* C++Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "C++Test"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0CEED61D11AA6E00DD2202 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3F2F4AD91E3AF68E00ED6314 /* CommonTestClasses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTestClasses.h; sourceTree = "<group>"; };
+		3F7B54D71E42B43300F4A874 /* Rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rational.h; sourceTree = "<group>"; };
 		3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		3FFC44591E08E62500365AAF /* SharedPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedPointer.cpp; sourceTree = "<group>"; };
 		3FFC445A1E08E62500365AAF /* SharedPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPointer.h; sourceTree = "<group>"; };
@@ -69,6 +71,8 @@
 				3F09BF841E226F54005B66CF /* ScopedDelete.h */,
 				3F09BF861E23511E005B66CF /* AssignmentTester.h */,
 				3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */,
+				3F2F4AD91E3AF68E00ED6314 /* CommonTestClasses.h */,
+				3F7B54D71E42B43300F4A874 /* Rational.h */,
 			);
 			path = "C++Test";
 			sourceTree = "<group>";

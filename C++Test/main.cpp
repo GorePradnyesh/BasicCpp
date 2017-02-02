@@ -14,6 +14,7 @@
 #include "SharedPointer.h"
 #include "ScopedDelete.h"
 #include "AssignmentTester.h"
+#include "Rational.h"
 
 #define PRINTLINE(line) \
 	std::cout << line << std::endl
@@ -28,7 +29,7 @@ void printExecutionOptions()
 	PRINTLINE("2 : Test Scoped Delete");
 	PRINTLINE("3 : Test Assignment operator");
 	PRINTLINE("4 : Rvalue assignment/ctor");
-	
+	PRINTLINE("5 : RationalNumber");
 	std::cout << "option : ";
 }
 
@@ -63,6 +64,9 @@ int main(int argc, const char * argv[])
 				break;
 			case 4:
 				TestRValueRefs();
+				break;
+			case 5:
+				Rational::RationalTest();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;

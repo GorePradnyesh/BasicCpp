@@ -8,35 +8,12 @@
 
 #include "SharedPointer.h"
 #include "CommonUtils.h"
+#include "CommonTestClasses.h"
 #include <memory>
 #include <iostream>
 
 namespace SharedPointerTest
 {
-	// InnerData class
-	class InnerData
-	{
-	public:
-	InnerData(int inData)
-		:data(inData)
-	{}
-		
-	private:
-		int data;
-	};
-	
-	// Wrapper Class
-	class Wrapper
-	{
-	public:
-		Wrapper(const InnerData& inInnerdata)
-			:mInnerData(inInnerdata)
-		{}
-	private:
-		InnerData mInnerData;
-	};
-	
-	
 	
 	// RefCount implementation
 	template <typename T>
@@ -165,7 +142,7 @@ namespace SharedPointerTest
 		T*								mData;
 	};
 	
-	
+	// Wrapper to test copy and move construction
 	class NewWrapper
 	{
 	public:
@@ -209,6 +186,7 @@ namespace SharedPointerTest
 			mInnerData = inInnerData;
 			return *this;
 		}
+		
 	private:
 		InnerData mInnerData;
 	};
@@ -224,6 +202,11 @@ namespace SharedPointerTest
 void TestRValueRefs()
 {
 	using namespace SharedPointerTest;
+	using UWrapper = std::unique_ptr<Wrapper>;
+	UWrapper UWrapper1 = UWrapper(new Wrapper(12));
+	UWrapper UWrapper2 = std::move(UWrapper1);
+	UWrapper UWrapper3(std::move(UWrapper2));
+	
 	NewWrapper newWrapper = NewWrapper(InnerData(3));
 	
 	PRINT_LINE("====");
@@ -251,6 +234,7 @@ void TestShared()
 {
 	using namespace SharedPointerTest;
 	InnerData data(4);
+	std::random_access_iterator_tag;
 	
 #define USE_STD_IMPL 0
 #if USE_STD_IMPL
