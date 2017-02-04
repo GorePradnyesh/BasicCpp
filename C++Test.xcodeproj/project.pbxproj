@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F0CEED71D11AA6E00DD2202 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F0CEED61D11AA6E00DD2202 /* main.cpp */; };
+		3F4A03201E44ED98002C9AD5 /* ExpressionEvaluator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */; };
 		3FFC445B1E08E62500365AAF /* SharedPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC44591E08E62500365AAF /* SharedPointer.cpp */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +30,10 @@
 		3F0CEED31D11AA6E00DD2202 /* C++Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "C++Test"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0CEED61D11AA6E00DD2202 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3F2F4AD91E3AF68E00ED6314 /* CommonTestClasses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTestClasses.h; sourceTree = "<group>"; };
+		3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpressionEvaluator.cpp; sourceTree = "<group>"; };
+		3F4A031F1E44ED98002C9AD5 /* ExpressionEvaluator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExpressionEvaluator.hpp; sourceTree = "<group>"; };
 		3F7B54D71E42B43300F4A874 /* Rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rational.h; sourceTree = "<group>"; };
+		3F7B54D81E4396C600F4A874 /* BasicLambdaTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicLambdaTest.h; sourceTree = "<group>"; };
 		3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		3FFC44591E08E62500365AAF /* SharedPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedPointer.cpp; sourceTree = "<group>"; };
 		3FFC445A1E08E62500365AAF /* SharedPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPointer.h; sourceTree = "<group>"; };
@@ -65,16 +69,59 @@
 		3F0CEED51D11AA6E00DD2202 /* C++Test */ = {
 			isa = PBXGroup;
 			children = (
+				3F4A031D1E44ED7D002C9AD5 /* Algorithms */,
+				3F4A031C1E44ED38002C9AD5 /* C++ Basics */,
+				3F4A031B1E44ED12002C9AD5 /* OOP */,
+				3F4A031A1E44ED00002C9AD5 /* Commons */,
+				3F4A03191E44ECDE002C9AD5 /* Pointers */,
 				3F0CEED61D11AA6E00DD2202 /* main.cpp */,
+			);
+			path = "C++Test";
+			sourceTree = "<group>";
+		};
+		3F4A03191E44ECDE002C9AD5 /* Pointers */ = {
+			isa = PBXGroup;
+			children = (
 				3FFC44591E08E62500365AAF /* SharedPointer.cpp */,
 				3FFC445A1E08E62500365AAF /* SharedPointer.h */,
 				3F09BF841E226F54005B66CF /* ScopedDelete.h */,
-				3F09BF861E23511E005B66CF /* AssignmentTester.h */,
+			);
+			name = Pointers;
+			sourceTree = "<group>";
+		};
+		3F4A031A1E44ED00002C9AD5 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
 				3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */,
 				3F2F4AD91E3AF68E00ED6314 /* CommonTestClasses.h */,
+			);
+			name = Commons;
+			sourceTree = "<group>";
+		};
+		3F4A031B1E44ED12002C9AD5 /* OOP */ = {
+			isa = PBXGroup;
+			children = (
+				3F09BF861E23511E005B66CF /* AssignmentTester.h */,
 				3F7B54D71E42B43300F4A874 /* Rational.h */,
 			);
-			path = "C++Test";
+			name = OOP;
+			sourceTree = "<group>";
+		};
+		3F4A031C1E44ED38002C9AD5 /* C++ Basics */ = {
+			isa = PBXGroup;
+			children = (
+				3F7B54D81E4396C600F4A874 /* BasicLambdaTest.h */,
+			);
+			name = "C++ Basics";
+			sourceTree = "<group>";
+		};
+		3F4A031D1E44ED7D002C9AD5 /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */,
+				3F4A031F1E44ED98002C9AD5 /* ExpressionEvaluator.hpp */,
+			);
+			name = Algorithms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +182,7 @@
 			files = (
 				3FFC445B1E08E62500365AAF /* SharedPointer.cpp in Sources */,
 				3F0CEED71D11AA6E00DD2202 /* main.cpp in Sources */,
+				3F4A03201E44ED98002C9AD5 /* ExpressionEvaluator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,8 @@
 #include "ScopedDelete.h"
 #include "AssignmentTester.h"
 #include "Rational.h"
+#include "BasicLambdaTest.h"
+#include "ExpressionEvaluator.hpp"
 
 #define PRINTLINE(line) \
 	std::cout << line << std::endl
@@ -30,6 +32,7 @@ void printExecutionOptions()
 	PRINTLINE("3 : Test Assignment operator");
 	PRINTLINE("4 : Rvalue assignment/ctor");
 	PRINTLINE("5 : RationalNumber");
+	PRINTLINE("6 : BasicLambda");
 	std::cout << "option : ";
 }
 
@@ -67,6 +70,15 @@ int main(int argc, const char * argv[])
 				break;
 			case 5:
 				Rational::RationalTest();
+				break;
+			case 6:
+				BasicLambda::InvokeBasicLambda();
+				break;
+			case 7:
+				BasicLambda::CapturedLambdaTest();
+				break;
+			case 8:
+				ExpressionEvaluator::TestNumericEval();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;
