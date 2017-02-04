@@ -117,6 +117,11 @@ namespace ExpressionEvaluator
 		}
 	}
 	
+	bool DetectRedundantParans(const std::string& inExpression)
+	{
+		return true;
+	}
+	
 	
 	bool DetectDoubleParans(const std::string& inExpression)
 	{
@@ -223,7 +228,7 @@ namespace ExpressionEvaluator
 							{
 								TokenURef& topToken = OperatorStack.top();
 								if(TokenType::operatorTokenType == topToken->GetTokenType() &&
-									topToken->GetPriority() > receivedToken->GetPriority())
+									topToken->GetPriority() >= receivedToken->GetPriority())
 								{
 									EvaluateAndPush();
 								}

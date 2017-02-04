@@ -13,6 +13,7 @@ namespace ExpressionEvaluator
 {
 	void TestNumericEval();
 	void TestDuplicateParanthesis();
+	void TestRedundantParanthesis();
 }
 
 

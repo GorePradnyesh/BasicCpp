@@ -16,6 +16,7 @@ namespace ExpressionEvaluator
 {
 	bool DetectDoubleParans(const std::string& inExpression);
 	uint64_t EvaluateExpression(const std::string& inExpression);
+	bool DetectRedundantParans(const std::string& inExpression);
 }
 
 #endif /* ExpressionParser_h */
