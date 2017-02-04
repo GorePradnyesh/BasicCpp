@@ -77,7 +77,7 @@ namespace ExpressionEvaluator
 	public:
 		TokenType GetTokenType() override
 		{
-			return TokenType::operatorTokenType;
+			return TokenType::endTokenType;
 		}
 	};
 	
@@ -145,6 +145,7 @@ namespace ExpressionEvaluator
 				case OperatorType::divideOperator:
 				case OperatorType::multiplyOperator:
 					mPriority = 2;
+					break;
 				case OperatorType::nonOperator:
 					mPriority = -1;
 				

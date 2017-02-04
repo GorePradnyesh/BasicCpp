@@ -20,7 +20,7 @@ namespace ExpressionEvaluator
 	/*
 	**
 	*/
-	TokenURef GetNextToken(std::string::const_iterator& inCurrentIterator, std::string inString)
+	TokenURef GetNextToken(std::string::const_iterator& inCurrentIterator, const std::string& inString)
 	{
 		if(inCurrentIterator == inString.end())
 		{
@@ -125,20 +125,27 @@ namespace ExpressionEvaluator
 		TokenURef receivedToken;
 		
 		// While either stack has something remaining
-		while(!(OperatorStack.empty() && OperatorStack.empty()))
-		{
+		while(inExpression.end() != beginIt
+			  || !OperandStack.empty()
+			  || !OperatorStack.empty())
+		{			
 			receivedToken = std::move(GetNextToken(beginIt, inExpression));
 			// PRINT_LINE("TOKEN RECEIVED :" << static_cast<int>(receivedToken->GetTokenType()));
 			auto EvaluateAndPush = [&OperandStack, &OperatorStack]()
 			{
-				std::uint64_t rhsValue = OperandStack.top();
-				OperandStack.pop();
-				std::uint64_t lhsValue = OperandStack.top();
-				OperandStack.pop();
-				TokenURef& operatorToken = OperatorStack.top();
-				assert(OperatorType::nonOperator != operatorToken->GetOperatorType());
-				uint64_t result = EvaluateOperator(operatorToken->GetOperatorType(), lhsValue, rhsValue);
-				OperandStack.push(result);
+				if(OperandStack.size() != 1)
+				{
+					std::uint64_t rhsValue = OperandStack.top();
+					OperandStack.pop();
+					std::uint64_t lhsValue = OperandStack.top();
+					OperandStack.pop();
+					TokenURef& operatorToken = OperatorStack.top();
+					assert(OperatorType::nonOperator != operatorToken->GetOperatorType());
+					uint64_t result = EvaluateOperator(operatorToken->GetOperatorType(), lhsValue, rhsValue);
+					OperandStack.push(result);
+				}
+				// pop the evaluated operator
+				OperatorStack.pop();
 			};
 			
 			switch (receivedToken->GetTokenType())
@@ -153,11 +160,21 @@ namespace ExpressionEvaluator
 					}
 				case TokenType::operatorTokenType:
 					{
-						TokenURef& topToken = OperatorStack.top();
-						while(topToken->GetPriority() > receivedToken->GetPriority())
+						if(!OperatorStack.empty())
 						{
-							// evaluate and push, update topToken
-							EvaluateAndPush();
+							while(true)
+							{
+								TokenURef& topToken = OperatorStack.top();
+								if(TokenType::operatorTokenType == topToken->GetTokenType() &&
+									topToken->GetPriority() > receivedToken->GetPriority())
+								{
+									EvaluateAndPush();
+								}
+								else
+								{
+									break;
+								}
+							}							
 						}
 						OperatorStack.push(std::move(receivedToken));
 					}
@@ -167,17 +184,28 @@ namespace ExpressionEvaluator
 						while(true)
 						{
 							EvaluateAndPush();
-							TokenURef& nextToken = OperatorStack.top();
-							// If while evaluing, encounter a (, pop it and stop evaluating
-							if(TokenType::openParanTokenType == nextToken->GetTokenType())
+							if(!OperatorStack.empty())
 							{
-								OperatorStack.pop();
+								TokenURef& nextToken = OperatorStack.top();
+								// If while evaluing, encounter a (, pop it and stop evaluating
+								if(TokenType::openParanTokenType == nextToken->GetTokenType())
+								{
+									OperatorStack.pop();
+									break;
+								}
+							}
+							else
+							{
 								break;
 							}
 						}
 					}
 					break;
 				case TokenType::endTokenType:
+					if(OperandStack.empty() && OperatorStack.empty())
+					{
+						break;
+					}
 					if(!OperatorStack.empty())
 					{
 						EvaluateAndPush();
@@ -190,14 +218,35 @@ namespace ExpressionEvaluator
 					break;
 			}
 		}
-		assert("Control should not reach this");
+		PRINT_LINE("Control should not reach this");
 		return 1;
 	}
 	
 	
 	void TestNumericEval()
 	{
-		std::string input = "(11+33)";
-		EvaluateExpression(input);
+		std::string input = "(1+3*4)";
+		std::uint64_t result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
+		
+		input = "(1*3+4)";
+		result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
+		
+		input = "1*3";
+		result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
+		
+		input = "(1*3+4)";
+		result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
+		
+		input = "(1)";
+		result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
+		
+		input = "11";
+		result = EvaluateExpression(input);
+		PRINT_LINE(input << " RESULT = " << result);
 	}
 }
