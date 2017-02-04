@@ -21,7 +21,7 @@ namespace ExpressionEvaluator
 	const static char kOpenParan = '(';
 	const static char kClosedParan = ')';
 	const static char kAddOperator = '+';
-	const static char kSubtractOperator = '+';
+	const static char kSubtractOperator = '-';
 	const static char kMultiplyOperator = '/';
 	const static char kDivideOperator = '*';
 	
@@ -38,8 +38,9 @@ namespace ExpressionEvaluator
 	{
 		addOperator			= '+',
 		subtractOperator	= '-',
-		multipleOperator	= '*',
-		divideOperator		= '/'
+		multiplyOperator	= '*',
+		divideOperator		= '/',
+		nonOperator			= -1
 	};
 	
 	/*
@@ -54,14 +55,27 @@ namespace ExpressionEvaluator
 		{
 			return TokenType::endTokenType;
 		}
+		
+		virtual std::uint64_t GetValue()
+		{
+			return 0;
+		}
+		
+		virtual int GetPriority()
+		{
+			return -1;
+		}
+		
+		virtual OperatorType GetOperatorType()
+		{
+			return OperatorType::nonOperator;
+		}
 	};
-	
-	using TokenURef = std::unique_ptr<Token>;
-	
+ 
 	class EndToken:public Token
 	{
 	public:
-		TokenType GetTokenType()
+		TokenType GetTokenType() override
 		{
 			return TokenType::operatorTokenType;
 		}
@@ -70,7 +84,7 @@ namespace ExpressionEvaluator
 	class OpenParanthesisToken:public Token
 	{
 	public:
-		TokenType GetTokenType()
+		TokenType GetTokenType() override
 		{
 			return TokenType::openParanTokenType;
 		}
@@ -80,68 +94,37 @@ namespace ExpressionEvaluator
 	class ClosedParanthesisToken:public Token
 	{
 	public:
-		TokenType GetTokenType()
+		TokenType GetTokenType() override
 		{
 			return TokenType::closedParanTokenType;
 		}
 	};
-
 	
 	/*
 	**	OPERAND
 	*/
-	template <typename T>
 	class OperandToken:public Token
 	{
 	public:
-		TokenType GetTokenType()
+		TokenType GetTokenType() override
 		{
 			return TokenType::operandTokenType;
 		}
 		
-		OperandToken(T inTokenValue)
+		OperandToken(std::uint64_t inTokenValue)
 		:mOperandValue(inTokenValue)
 		{}
 		
-		T GetValue()
+		std::uint64_t GetValue() override
 		{
 			return mOperandValue;
 		}
 	private:
-		T mOperandValue;
+		std::uint64_t mOperandValue;
 	};
 	
 	
-	template <typename T>
-	bool GetNumberFromString(const std::string& inExpression, std::string::const_iterator& stringIterator, T& outNumber)
-	{
-		std::stringstream outStringStream("");
-		bool foundNumber = false;
-		if(stringIterator == inExpression.end())
-		{
-			return false;
-		}
-		while(true)
-		{
-			if(isdigit(*stringIterator))
-			{
-				foundNumber = true;
-				outStringStream << *stringIterator;
-				++stringIterator;
-			}
-			else
-			{
-				break;
-			}
-		}
-		// if nothing was parsed return
-		if(!foundNumber)
-		{
-			return false;
-		}
-		outStringStream >> outNumber;
-		return true;
-	}
+	bool GetNumberFromString(const std::string& inExpression, std::string::const_iterator& stringIterator, std::uint64_t& outNumber);
 	
 	/*
 	**	OPERATOR
@@ -152,6 +135,7 @@ namespace ExpressionEvaluator
 		OperatorToken(char inOperatorValue)
 		:mOperatorType(static_cast<OperatorType>(inOperatorValue))
 		{
+			// can use enum values for priority as well
 			switch(mOperatorType)
 			{
 				case OperatorType::addOperator:
@@ -159,12 +143,15 @@ namespace ExpressionEvaluator
 					mPriority = 1;
 					break;
 				case OperatorType::divideOperator:
-				case OperatorType::multipleOperator:
+				case OperatorType::multiplyOperator:
 					mPriority = 2;
+				case OperatorType::nonOperator:
+					mPriority = -1;
+				
 			}
 		}
 		
-		TokenType GetTokenType()
+		TokenType GetTokenType() override
 		{
 			return TokenType::operatorTokenType;
 		}
@@ -172,6 +159,11 @@ namespace ExpressionEvaluator
 		OperatorType GetOperatorType()
 		{
 			return mOperatorType;
+		}
+		
+		int GetPriority() override
+		{
+			return mPriority;
 		}
 	private:
 		OperatorType	mOperatorType;
@@ -181,7 +173,9 @@ namespace ExpressionEvaluator
 	
 	bool IsValidOperator(char inChar);
 	
-	
+	// Aliases
+	using TokenURef		= std::unique_ptr<Token>;
+	using OperandURef	= std::unique_ptr<OperandToken>;
 	
 }
 
