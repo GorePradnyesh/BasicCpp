@@ -16,7 +16,7 @@
 #include "AssignmentTester.h"
 #include "Rational.h"
 #include "BasicLambdaTest.h"
-#include "ExpressionEvaluator.hpp"
+#include "ExpressionParseTest.h"
 
 #define PRINTLINE(line) \
 	std::cout << line << std::endl
@@ -79,6 +79,9 @@ int main(int argc, const char * argv[])
 				break;
 			case 8:
 				ExpressionEvaluator::TestNumericEval();
+				break;
+			case 9:
+				ExpressionEvaluator::TestDuplicateParanthesis();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;

@@ -15,9 +15,7 @@
 #include <sstream>
 
 namespace ExpressionEvaluator
-{
-	void TestNumericEval();
-	
+{	
 	const static char kOpenParan = '(';
 	const static char kClosedParan = ')';
 	const static char kAddOperator = '+';

@@ -42,27 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "C++Test/ExpressionEvaluator.cpp"
-            timestampString = "507924850.625589"
+            timestampString = "507931645.069682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "EvaluateExpression(const std::string&amp; inExpression)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "C++Test/ExpressionEvaluator.cpp"
-            timestampString = "507924631.91095"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "EvaluateExpression(const std::string&amp; inExpression)"
             landmarkType = "9">
          </BreakpointContent>

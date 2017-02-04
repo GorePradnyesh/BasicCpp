@@ -6,7 +6,8 @@
 //  Copyright © 2017 Adobe. All rights reserved.
 //
 
-#include "ExpressionEvaluator.hpp"
+#include "ExpressionEvaluator.h"
+#include "ExpressionParser.h"
 #include "CommonUtils.h"
 
 #include <stack>
@@ -116,6 +117,62 @@ namespace ExpressionEvaluator
 		}
 	}
 	
+	
+	bool DetectDoubleParans(const std::string& inExpression)
+	{
+		std::stack<TokenURef>		OperatorStack;
+		auto beginIt = inExpression.begin();
+		TokenURef receivedToken;
+		
+		// While either stack has something remaining
+		while(inExpression.end() != beginIt)
+		{
+			receivedToken = std::move(GetNextToken(beginIt, inExpression));
+			switch (receivedToken->GetTokenType())
+			{
+				case TokenType::operandTokenType:
+					// discard operands
+					break;
+				case TokenType::openParanTokenType:
+				case TokenType::closedParanTokenType:
+				case TokenType::operatorTokenType:
+					OperatorStack.push(std::move(receivedToken));
+					break;
+				case TokenType::endTokenType:
+					break;
+			}
+		}
+		
+		int currentWeight = 0;
+		int paramBalance = 0;
+		while(!OperatorStack.empty())
+		{
+			TokenURef& topToken = OperatorStack.top();
+			switch (topToken->GetTokenType())
+			{
+				case TokenType::closedParanTokenType:
+					paramBalance++;
+					currentWeight++;
+					break;
+				case TokenType::operatorTokenType:
+					currentWeight--;
+					break;
+				case TokenType::openParanTokenType:
+					paramBalance--;
+				case TokenType::operandTokenType:
+				case TokenType::endTokenType:
+					break;
+			}
+			OperatorStack.pop();
+		}
+		if(currentWeight > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	
 	uint64_t EvaluateExpression(const std::string& inExpression)
 	{
 		std::stack<std::uint64_t> 	OperandStack;
@@ -222,31 +279,4 @@ namespace ExpressionEvaluator
 		return 1;
 	}
 	
-	
-	void TestNumericEval()
-	{
-		std::string input = "(1+3*4)";
-		std::uint64_t result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
-		input = "(1*3+4)";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
-		input = "1*3";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
-		input = "(1*3+4)";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
-		input = "(1)";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
-		input = "11";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-	}
 }
