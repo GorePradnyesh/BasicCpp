@@ -7,6 +7,8 @@
 //
 
 #include "Tree.h"
+#include "CommonUtils.h"
+
 #include <vector>
 #ifndef TreeUtils_h
 #define TreeUtils_h
@@ -25,9 +27,9 @@ namespace Tree
 		}
 		else
 		{
-			InOrderWalk(inNode->Left());
-			PRINT_LINE(inNode->GetData());
-			InOrderWalk(inNode->Right());
+			InOrderPrint(inNode->Left());
+			PRINT_LINE(inNode->GetValue() << ", ");
+			InOrderPrint(inNode->Right());
 		}
 	}
 	
@@ -35,16 +37,17 @@ namespace Tree
 	**
 	*/
 	template <typename T>
-	void ConstructBinaryTreeFromVec(const std::vector<T>& inSourceData)
+	NPtr<T> ConstructBinaryTreeFromVec(const std::vector<T>& inSourceData)
 	{
 		// using NodePtr = std::shared_ptr<Node<T>>;
 		auto currentIt = inSourceData.begin();
 		NPtr<T> rootNode;
 		while(currentIt != inSourceData.end())
 		{
-			addNode(rootNode, *currentIt);
+			addBinaryNode(rootNode, *currentIt);
 			currentIt++;
 		};
+		return rootNode;
 	}
 	
 	
@@ -52,20 +55,35 @@ namespace Tree
 	**
 	*/
 	template <typename T>
-	void addNode(NPtr<T>& inNode, const T& inDataValue)
+	void addBinaryNode(NPtr<T>& inNode, const T& inDataValue)
 	{
 		if(!inNode)
 		{
 			inNode = NPtr<T>(new Node<T>(inDataValue));
 		}
-		else if(inDataValue > inNode->GetValue())
+		else if(inDataValue < inNode->GetValue())
 		{
-			addNode(inNode->Left(), inDataValue);
+			addBinaryNode(inNode->Left(), inDataValue);
 		}
 		else
 		{
-			addNode(inNode->Right(), inDataValue);
+			addBinaryNode(inNode->Right(), inDataValue);
 		}
+	}
+	
+	/*
+	**
+	*/
+	template <typename T>
+	int GetMaxDepth(const NPtr<T>& inNode)
+	{
+		if(!inNode)
+		{
+			return 0;
+		}
+		int leftDepth = GetMaxDepth(inNode->Left());
+		int rightDepth = GetMaxDepth(inNode->Right());
+		return std::max(leftDepth, rightDepth) + 1;
 	}
 	
 }
