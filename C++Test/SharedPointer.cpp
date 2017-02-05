@@ -234,7 +234,6 @@ void TestShared()
 {
 	using namespace SharedPointerTest;
 	InnerData data(4);
-	std::random_access_iterator_tag;
 	
 #define USE_STD_IMPL 0
 #if USE_STD_IMPL

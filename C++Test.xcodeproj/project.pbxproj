@@ -10,6 +10,7 @@
 		3F0CEED71D11AA6E00DD2202 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F0CEED61D11AA6E00DD2202 /* main.cpp */; };
 		3F4A03201E44ED98002C9AD5 /* ExpressionEvaluator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */; };
 		3F4A03251E466A8E002C9AD5 /* ExpressionParseTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A03231E466A8E002C9AD5 /* ExpressionParseTest.cpp */; };
+		3F4A032E1E46CF84002C9AD5 /* TreeTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A032C1E46CF84002C9AD5 /* TreeTests.cpp */; };
 		3FFC445B1E08E62500365AAF /* SharedPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC44591E08E62500365AAF /* SharedPointer.cpp */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,10 @@
 		3F4A03221E4669E5002C9AD5 /* ExpressionParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressionParser.h; sourceTree = "<group>"; };
 		3F4A03231E466A8E002C9AD5 /* ExpressionParseTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpressionParseTest.cpp; sourceTree = "<group>"; };
 		3F4A03241E466A8E002C9AD5 /* ExpressionParseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionParseTest.h; sourceTree = "<group>"; };
+		3F4A03261E46B863002C9AD5 /* Tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tree.h; path = Algorithms/Trees/Tree.h; sourceTree = "<group>"; };
+		3F4A03281E46CC85002C9AD5 /* TreeUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreeUtils.h; path = Algorithms/Trees/TreeUtils.h; sourceTree = "<group>"; };
+		3F4A032C1E46CF84002C9AD5 /* TreeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TreeTests.cpp; path = Algorithms/Trees/TreeTests.cpp; sourceTree = "<group>"; };
+		3F4A032D1E46CF84002C9AD5 /* TreeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeTests.h; path = Algorithms/Trees/TreeTests.h; sourceTree = "<group>"; };
 		3F7B54D71E42B43300F4A874 /* Rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rational.h; sourceTree = "<group>"; };
 		3F7B54D81E4396C600F4A874 /* BasicLambdaTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicLambdaTest.h; sourceTree = "<group>"; };
 		3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 		3F4A031D1E44ED7D002C9AD5 /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				3F4A03271E46B87A002C9AD5 /* Trees */,
 				3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */,
 				3F4A031F1E44ED98002C9AD5 /* ExpressionEvaluator.h */,
 				3F4A03221E4669E5002C9AD5 /* ExpressionParser.h */,
@@ -129,6 +135,17 @@
 				3F4A03241E466A8E002C9AD5 /* ExpressionParseTest.h */,
 			);
 			name = Algorithms;
+			sourceTree = "<group>";
+		};
+		3F4A03271E46B87A002C9AD5 /* Trees */ = {
+			isa = PBXGroup;
+			children = (
+				3F4A032C1E46CF84002C9AD5 /* TreeTests.cpp */,
+				3F4A032D1E46CF84002C9AD5 /* TreeTests.h */,
+				3F4A03261E46B863002C9AD5 /* Tree.h */,
+				3F4A03281E46CC85002C9AD5 /* TreeUtils.h */,
+			);
+			name = Trees;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FFC445B1E08E62500365AAF /* SharedPointer.cpp in Sources */,
+				3F4A032E1E46CF84002C9AD5 /* TreeTests.cpp in Sources */,
 				3F0CEED71D11AA6E00DD2202 /* main.cpp in Sources */,
 				3F4A03201E44ED98002C9AD5 /* ExpressionEvaluator.cpp in Sources */,
 				3F4A03251E466A8E002C9AD5 /* ExpressionParseTest.cpp in Sources */,

@@ -18,6 +18,8 @@
 #include "BasicLambdaTest.h"
 #include "ExpressionParseTest.h"
 
+#include "TreeTests.h"
+
 #define PRINTLINE(line) \
 	std::cout << line << std::endl
 
@@ -83,11 +85,13 @@ int main(int argc, const char * argv[])
 			case 9:
 				ExpressionEvaluator::TestDuplicateParanthesis();
 				break;
+			case 10:
+				TreeTest::CreatePrintBinaryTree();
+				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;
 				return -1;
 		}
-	
 	}
 
     return 0;

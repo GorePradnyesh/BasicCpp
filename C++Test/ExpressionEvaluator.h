@@ -155,7 +155,7 @@ namespace ExpressionEvaluator
 			return TokenType::operatorTokenType;
 		}
 		
-		OperatorType GetOperatorType()
+		OperatorType GetOperatorType() override
 		{
 			return mOperatorType;
 		}
