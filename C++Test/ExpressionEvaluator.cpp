@@ -117,9 +117,43 @@ namespace ExpressionEvaluator
 		}
 	}
 	
+	// TODO: incomplete !!!
 	bool DetectRedundantParans(const std::string& inExpression)
 	{
-		return true;
+		std::stack<TokenURef>		OperatorStack;
+		auto beginIt = inExpression.begin();
+		TokenURef receivedToken;
+		
+		// While either stack has something remaining
+		while(inExpression.end() != beginIt)
+		{
+			receivedToken = std::move(GetNextToken(beginIt, inExpression));
+			switch (receivedToken->GetTokenType())
+			{
+				case TokenType::operandTokenType:
+					// discard operands
+					break;
+				case TokenType::openParanTokenType:
+				case TokenType::closedParanTokenType:
+				case TokenType::operatorTokenType:
+					OperatorStack.push(std::move(receivedToken));
+					break;
+				case TokenType::endTokenType:
+					break;
+			}
+		}
+		/*
+		int currentPrecendece		= -1;
+		int precendenceCount		= 0;
+		int operatorCount			= 0;
+		int paramBalance			= 0;
+		int paranPairCount			= 0;
+		while(!OperatorStack.empty())
+		{
+		
+		}
+		*/
+		return false;
 	}
 	
 	

@@ -28,10 +28,6 @@ namespace ExpressionEvaluator
 		result = EvaluateExpression(input);
 		PRINT_LINE(input << " RESULT = " << result);
 		
-		input = "(1*3+4)";
-		result = EvaluateExpression(input);
-		PRINT_LINE(input << " RESULT = " << result);
-		
 		input = "(1)";
 		result = EvaluateExpression(input);
 		PRINT_LINE(input << " RESULT = " << result);
@@ -73,16 +69,28 @@ namespace ExpressionEvaluator
 	
 	void TestRedundantParanthesis()
 	{
-		std::string input = "(1+3)";
+		std::string input = "(1+3)";	// not
 		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
 		
-		input = "((1+3))";
+		input = "((1+3))";		// yes
 		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
 		
-		input = "((1+3)*6)";
+		input = "((1+3)*6)";	// not
 		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
 		
-		input = "((1+3)+6)";
+		input = "((1*3)+6)";	// yes
+		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
+		
+		input = "((1+3)+6)";	// yes
+		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
+		
+		input = "((40/2)*4)";	// yes
+		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
+		
+		input = "((40*2)/4)";	// yes
+		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
+		
+		input = "(40/2*4)";		// not
 		PRINT_LINE(input << " REDUNDANT " << ExpressionEvaluator::DetectRedundantParans(input));
 	}
 	
