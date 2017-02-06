@@ -12,38 +12,7 @@
 namespace QuickSort
 {
 	namespace
-	{
-		
-		void Partition2(std::vector<int>& inDataSource, size_t inLeftIndex, size_t inRightIndex)
-		{
-			size_t leftIndex = inLeftIndex;
-			size_t rightIndex = inRightIndex;
-			if(leftIndex == rightIndex)
-			{
-				return; // single element, no partitioning
-			}
-			int pivotValue = inDataSource[(leftIndex + rightIndex)/2];
-			
-			while(leftIndex < rightIndex )
-			{
-				while(inDataSource[leftIndex] <= pivotValue)
-				{
-					leftIndex++;
-				}
-				while(inDataSource[rightIndex] > pivotValue)
-				{
-					rightIndex--;
-				}
-				if(leftIndex < rightIndex)
-				{
-					std::swap(inDataSource[leftIndex], inDataSource[rightIndex]);
-				}
-			}
-			// here leftIndex == rightIndex
-			Partition2(inDataSource, leftIndex +1, inRightIndex);
-			Partition2(inDataSource, inLeftIndex, leftIndex - 1);
-		}
-		
+	{		
 		int Partition(std::vector<int>& inDataSource, int leftIndex, int rightIndex)
 		{
 			int left = leftIndex;
