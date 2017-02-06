@@ -17,6 +17,7 @@
 #include "Rational.h"
 #include "BasicLambdaTest.h"
 #include "ExpressionParseTest.h"
+#include "QuickSort.h"
 
 #include "TreeTests.h"
 
@@ -87,6 +88,9 @@ int main(int argc, const char * argv[])
 				break;
 			case 10:
 				TreeTest::CreatePrintBinaryTree();
+				break;
+			case 11:
+				QuickSort::TestQuickSort();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;

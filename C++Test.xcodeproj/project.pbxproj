@@ -41,6 +41,7 @@
 		3F4A03281E46CC85002C9AD5 /* TreeUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreeUtils.h; path = Algorithms/Trees/TreeUtils.h; sourceTree = "<group>"; };
 		3F4A032C1E46CF84002C9AD5 /* TreeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TreeTests.cpp; path = Algorithms/Trees/TreeTests.cpp; sourceTree = "<group>"; };
 		3F4A032D1E46CF84002C9AD5 /* TreeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeTests.h; path = Algorithms/Trees/TreeTests.h; sourceTree = "<group>"; };
+		3F4A03301E47F2F7002C9AD5 /* QuickSort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QuickSort.h; path = Algorithms/Sorting/QuickSort.h; sourceTree = "<group>"; };
 		3F7B54D71E42B43300F4A874 /* Rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rational.h; sourceTree = "<group>"; };
 		3F7B54D81E4396C600F4A874 /* BasicLambdaTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicLambdaTest.h; sourceTree = "<group>"; };
 		3FA2F3711E37E5BE00B3D3F0 /* CommonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		3F4A031D1E44ED7D002C9AD5 /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				3F4A032F1E47F196002C9AD5 /* Sorting */,
 				3F4A03271E46B87A002C9AD5 /* Trees */,
 				3F4A031E1E44ED98002C9AD5 /* ExpressionEvaluator.cpp */,
 				3F4A031F1E44ED98002C9AD5 /* ExpressionEvaluator.h */,
@@ -146,6 +148,14 @@
 				3F4A03281E46CC85002C9AD5 /* TreeUtils.h */,
 			);
 			name = Trees;
+			sourceTree = "<group>";
+		};
+		3F4A032F1E47F196002C9AD5 /* Sorting */ = {
+			isa = PBXGroup;
+			children = (
+				3F4A03301E47F2F7002C9AD5 /* QuickSort.h */,
+			);
+			name = Sorting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
