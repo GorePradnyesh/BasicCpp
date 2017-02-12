@@ -18,6 +18,8 @@
 #include "BasicLambdaTest.h"
 #include "ExpressionParseTest.h"
 #include "QuickSort.h"
+#include "BinaryOperations.h"
+#include "Matrix.h"
 
 #include "TreeTests.h"
 
@@ -91,6 +93,18 @@ int main(int argc, const char * argv[])
 				break;
 			case 11:
 				QuickSort::TestQuickSort();
+				break;
+			case 12:
+				BinaryOperations::TestDecimalToBinary();
+				break;
+			case 13:
+				BinaryOperations::TestBinaryToDecimal();
+				break;
+			case 14:
+				BinaryOperations::TestBinaryAddition();
+				break;
+			case 15:
+				Matrix::TestMatrix();
 				break;
 			default:
 				std::cout << "Invalid argument." << std::endl;
